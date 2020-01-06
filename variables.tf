@@ -61,3 +61,8 @@ variable "nat_gateway_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "default_security_group_tags" {
+  type        = map(string)
+  default     = {}
+}
