@@ -34,6 +34,8 @@ resource "aws_internet_gateway" "this" {
     )}"
 }
 
+
+
 resource "aws_subnet" "public" {
 
     count = "${length(var.public_subnets)}"
@@ -68,7 +70,26 @@ resource "aws_subnet" "private" {
     )}"
 }
 
+resource "aws_eip" "nat" {
+  count = "${length(var.public_subnets)}"
+  vpc   = true
+}
 
+
+
+resource "aws_nat_gateway" "nat_gateway" {
+  count         = "${length(var.public_subnets)}"
+  allocation_id = "${element(aws_eip.nat.*.id, count.index)}"
+  subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
+
+  tags = "${merge(
+    var.common_tags,
+    var.nat_gateway_tags,
+    map(
+      "Name", "${var.name}-ngw-${count.index}"
+    )
+  )}"
+}
 
 
 #Public Route Table
