@@ -7,9 +7,9 @@ provider "aws"{
 terraform {
   backend "s3" {
     # Replace this with your bucket name!
-    bucket         = "${var.tf-state-bucket-infra}-${var.tf-state-bucket-infra}"
+    bucket         = "terraform-nxgcloud-infra-development"
     key            = "global/infra/vpc.tfstate"
-    region         = var.region
+    region         = "ap-south-1"
   }
 }
 
