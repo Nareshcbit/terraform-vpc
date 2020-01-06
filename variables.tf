@@ -1,3 +1,7 @@
+variable "tf-state-bucket-infra"{
+  default = "terraform-nxgcloud-infra"
+}
+variable "environment" {default = "development"}
 
 variable "region" { default = "ap-south-1"}
 

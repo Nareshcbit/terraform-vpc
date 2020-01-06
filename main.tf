@@ -4,6 +4,16 @@ provider "aws"{
 
 }
 
+terraform {
+  backend "s3" {
+    # Replace this with your bucket name!
+    bucket         = "${var.tf-state-bucket-infra}-${var.tf-state-bucket-infra}"
+    key            = "global/infra/vpc.tfstate"
+    region         = var.region
+  }
+}
+
+
 data "aws_availability_zones" "available" {}
 
 resource "aws_vpc" "this" {
