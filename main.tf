@@ -1,7 +1,5 @@
 provider "aws"{
-
   region = var.region
-
 }
 
 terraform {
@@ -12,7 +10,6 @@ terraform {
     region         = "ap-south-1"
   }
 }
-
 
 data "aws_availability_zones" "available" {}
 
